@@ -40,14 +40,11 @@ public class AEXBanner extends Application {
         primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             @Override
             public void handle(WindowEvent we) {
+                
                 System.exit(1);
             }
         });
-        try {
-            controller = new BannerController(this);
-        } catch (RemoteException e) {
-            System.out.println("Error creating BC");
-        }
+        
 
         Font font = new Font("Arial", HEIGHT);
         text = new Text();
@@ -92,6 +89,11 @@ public class AEXBanner extends Application {
 
             }
         };
+        try {
+            controller = new BannerController(this);
+        } catch (RemoteException e) {
+            System.out.println("Error creating BC");
+        }
         animationTimer.start();
     }
 

@@ -24,13 +24,13 @@ public class MockEffectenbeurs extends UnicastRemoteObject implements IEffectenb
     public MockEffectenbeurs(BasicPublisher publisher) throws RemoteException 
     {
         koersen = new ArrayList<Fonds>();
-        koersen.add(new Fonds("Anaal B.V.", 666));
-        koersen.add(new Fonds("Sander's Plagiaatshop", 100));
-        koersen.add(new Fonds("Bert's Tenenkaaswinkel", 60));
+        koersen.add(new Fonds("A", 666));
+        koersen.add(new Fonds("B", 100));
+        koersen.add(new Fonds("C", 60));
         //koersen.add(new Fonds("Samsung", 80));
         //koersen.add(new Fonds("Asus", 65));
         timer = new Timer();
-        timer.scheduleAtFixedRate(new MockTask(), 0, 200);
+        timer.scheduleAtFixedRate(new MockTask(), 0, 100);
         this.publisher = publisher;
     }
 
@@ -56,7 +56,7 @@ public class MockEffectenbeurs extends UnicastRemoteObject implements IEffectenb
         public void run() {
             for (Fonds f : koersen) {
                 if (Math.floor(Math.random() * 101) == 0) {
-                    double oldVal = f.getKoers();
+                    String oldVal = f.getNaam();
                     f.setKoers(f.getKoers() + Math.floor(Math.random() * 56 - 10));
                     double newVal = f.getKoers();
                     publisher.inform(this, "koersUpdate", oldVal, newVal);

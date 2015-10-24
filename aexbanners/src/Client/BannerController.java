@@ -65,11 +65,12 @@ public class BannerController extends UnicastRemoteObject implements RemotePrope
         } catch (RemoteException e) {
             System.out.println("Probleem bij het toevoegen van listener!");
         }
+        this.banner.setKoersen(getKoers());
     }
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) throws RemoteException {
-        System.out.println("Koersupdate ontvangen. O: " + evt.getOldValue() + " N: " + evt.getNewValue());
+        System.out.println("Koersupdate ontvangen. " + evt.getOldValue() + " N: " + evt.getNewValue());
         try {
             banner.setKoersen(getKoers());
         } catch (RemoteException e) {
